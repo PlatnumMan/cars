@@ -21,8 +21,6 @@ function getIntersection(A, B, C, D) {
   return null;
 }
 
-
-
 function polysIntersect(poly1, poly2) {
   for (let i = 0; i < poly1.length - 1; i++) {
     for (let j = 0; j < poly2.length - 1; j++) {
@@ -38,4 +36,12 @@ function polysIntersect(poly1, poly2) {
     }
   }
   return false;
+}
+
+function getRGBA(value) {
+  const alpha = Math.abs(value);
+  const R = value < 0 ? 0 : 255;
+  const G = R;
+  const B = value > 0 ? 0 : 255;
+  return "rgba(" + R + ", " + G + ", " + B + ", " + alpha + ")";
 }
