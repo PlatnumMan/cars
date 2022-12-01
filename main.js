@@ -10,6 +10,11 @@ const N = 100;
 const cars = generateCars(N);
 const traffic = [new Car(100, -100, 30, 50, "DUMMY", 2)];
 
+let bestCar = cars[0];
+if (localStorage.getItem("bestBrain")) {
+  bestCar = JSON.parse(localStorage.getItem("bestBrain"));
+}
+
 animate();
 
 function animate() {
@@ -20,7 +25,7 @@ function animate() {
     cars[i].update(road.borders, traffic);
   }
 
-  const bestCar = cars.find((c) => c.y == Math.min(...cars.map((c) => c.y)));
+  bestCar = cars.find((c) => c.y == Math.min(...cars.map((c) => c.y)));
 
   carCanvas.height = window.innerHeight;
   networkCanvas.height = window.innerHeight;
@@ -51,4 +56,10 @@ function generateCars(N) {
   return cars;
 }
 
-function save()
+function save() {
+  localStorage.setItem("bestBrain", JSON.stringify(bestCar.brain));
+}
+
+function discard() {
+  localStorage.removeItem("bestBrain");
+}
